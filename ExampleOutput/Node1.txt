@@ -1,0 +1,142 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20180812225126
+Username: EYAS\pyukman
+RunAs User: EYAS\pyukman
+Configuration Name: 
+Machine: EYAS (Microsoft Windows NT 10.0.16299.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+Process ID: 12724
+PSVersion: 5.1.16299.251
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.16299.251
+BuildVersion: 10.0.16299.251
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is ..\..\..\ExampleOutput\Node1.txt
+PS C:\pyukman\Documents\UChicago\MPCS\mpcs-blockchain\lab7\Problem3\NikCoinNode\bin\Debug> .\NikCoinNode.exe 50883
+bootstrapping node network...
+received handshake from: localhost:50884
+received handshake from: localhost:50885
+ADDING TXN: aab5e3f9691b82cd3591136e3942f0d73b15cbf91aee0106c2b14a1a5160fb0a
+ADDING TXN: fe22f769ddbe83b81a95ebdf1b7d565e9ec58cedd6964ff2f5b59e9f4568ff60
+3 nodes in network! bootstrapping complete
+simulating incoming transactions...
+starting miner...
+GENERATED TXN: 103878ee46011f4f3ebd100779f3c03e3b3336c2e2288872a84245687e83811d
+
+
+Press any key to quit
+ADDING TXN: 103878ee46011f4f3ebd100779f3c03e3b3336c2e2288872a84245687e83811d
+
+MINED NEW BLOCK! Took 320847 tries, hash = 000002af4baa492393b67ae14f635e8bb23d86e368052636ac84f0994b2d07f5
+hash: [000002af4baa492393b67ae14f635e8bb23d86e368052636ac84f0994b2d07f5]
+prevBlockHash: [49895b9c7e209775724b9132589d51ece56b0bad4fc1ba267186f7f293a54ccb]
+merkleRootHash:[f3b2143e236b2316a1784577905de920bd45ae42aa8734fb821a2dbd0fd6706b]
+    transaction 0 -- hash: [ebbca9898b6db24bf0a2fbfbdcc7cfcfee43285fbb7f37d3a448e7fb6828562f], inputs: [coinbase], outputs: [coinbase txn at 22:52:12.611719 + random double 0.484815059921152, Value = 750000]
+    transaction 1 -- hash: [aab5e3f9691b82cd3591136e3942f0d73b15cbf91aee0106c2b14a1a5160fb0a], inputs: [22:52:11.900093], outputs: [03:52:11.904020, Value = 0]
+    transaction 2 -- hash: [fe22f769ddbe83b81a95ebdf1b7d565e9ec58cedd6964ff2f5b59e9f4568ff60], inputs: [22:52:12.116146], outputs: [03:52:12.122033, Value = 0]
+    transaction 3 -- hash: [103878ee46011f4f3ebd100779f3c03e3b3336c2e2288872a84245687e83811d], inputs: [22:52:12.581298], outputs: [03:52:12.587185, Value = 0]
+
+added new block: 000002af4baa492393b67ae14f635e8bb23d86e368052636ac84f0994b2d07f5
+new blockchain height = 1
+ADDING TXN: 715eb0420c559d230adf3cce8fcd16ca7836bf241d3b49bce904d6f88744bc79
+GENERATED TXN: 4718a172bad0db30ef39f17646250db38f3f80c1768e56d7442cb63524901f33
+ADDING TXN: 4718a172bad0db30ef39f17646250db38f3f80c1768e56d7442cb63524901f33
+ADDING TXN: 963214f6633f2aa03193145362c1e1e448ff6e5de9856cd695a8e672c76e3184
+RECEIVED BLOCK: 0000089a4f6023db355597315721aca76412f6b300bcbae2910823fe6ebe0d8f
+added new block: 0000089a4f6023db355597315721aca76412f6b300bcbae2910823fe6ebe0d8f
+new blockchain height = 2
+GENERATED TXN: db46c5feb0eb07966ed115fc3577a72cc79288707e67704b2c877c8e4b64ecaa
+ADDING TXN: db46c5feb0eb07966ed115fc3577a72cc79288707e67704b2c877c8e4b64ecaa
+ADDING TXN: 054b937894ef9a897acc9e746d6f7cc9ec03763d3f7cb5810bd4ddf26e31b9ed
+
+MINED NEW BLOCK! Took 116664 tries, hash = 00000dd0088bfe11c4628de2fc5226c02ef0644beaf44e63e9c455d6d3e65dfe
+hash: [00000dd0088bfe11c4628de2fc5226c02ef0644beaf44e63e9c455d6d3e65dfe]
+prevBlockHash: [0000089a4f6023db355597315721aca76412f6b300bcbae2910823fe6ebe0d8f]
+merkleRootHash:[a056c16862ca3f703df2ff62c1087787a8b02834041fc691042597a6e7ae08b4]
+    transaction 0 -- hash: [fbf22bb96c00af1cb70e801abd80040913310288e6f3a6e15966d105cc45167f], inputs: [coinbase], outputs: [coinbase txn at 22:52:27.300346 + random double 0.490827726428782, Value = 750000]
+    transaction 1 -- hash: [db46c5feb0eb07966ed115fc3577a72cc79288707e67704b2c877c8e4b64ecaa], inputs: [22:52:27.204608], outputs: [03:52:27.204608, Value = 0]
+    transaction 2 -- hash: [054b937894ef9a897acc9e746d6f7cc9ec03763d3f7cb5810bd4ddf26e31b9ed], inputs: [22:52:27.254284], outputs: [03:52:27.254284, Value = 0]
+
+added new block: 00000dd0088bfe11c4628de2fc5226c02ef0644beaf44e63e9c455d6d3e65dfe
+new blockchain height = 3
+ADDING TXN: 03e3ce9163292d619cf609ad3668f7c4b7513e0d0aa8cbabb4da647dcc8d3624
+RECEIVED BLOCK: 00001185157433d50549b454975848897855b34414a51748b7c70fd82556face
+added new block: 00001185157433d50549b454975848897855b34414a51748b7c70fd82556face
+new blockchain height = 4
+ADDING TXN: 3fb0f4e38912bcddc9189dfbb62ec74c4f20e1550d32c6402b0965632678d8f8
+
+MINED NEW BLOCK! Took 74484 tries, hash = 000005ae0e8e2c8a433b1136bc12df88335ef9d5e4e2f73fa900b16285676f51
+hash: [000005ae0e8e2c8a433b1136bc12df88335ef9d5e4e2f73fa900b16285676f51]
+prevBlockHash: [00001185157433d50549b454975848897855b34414a51748b7c70fd82556face]
+merkleRootHash:[7200782080cac6b19518d79ed8ec677cc8140417655203ac500441343b80463b]
+    transaction 0 -- hash: [62f315514b7fbcd17353a73a64c1fd01ce2c3c6a35b4a3cfdf6cf39ebcdbf01e], inputs: [coinbase], outputs: [coinbase txn at 22:52:34.757180 + random double 0.2593986286127, Value = 750000]
+    transaction 1 -- hash: [3fb0f4e38912bcddc9189dfbb62ec74c4f20e1550d32c6402b0965632678d8f8], inputs: [22:52:34.705951], outputs: [03:52:34.705951, Value = 0]
+
+added new block: 000005ae0e8e2c8a433b1136bc12df88335ef9d5e4e2f73fa900b16285676f51
+new blockchain height = 5
+ADDING TXN: 5ab0d208201c9abe0e3ed0505d839b9d18376237344d74ad8a57215b0d1d1110
+GENERATED TXN: 920fcae3281c358c1f917a8413347a26130a3c2004ef41d1a8a885772c926745
+ADDING TXN: 920fcae3281c358c1f917a8413347a26130a3c2004ef41d1a8a885772c926745
+RECEIVED BLOCK: 0000032f80c32673f465b793bd874124e9f05a013d4e0daf88f8b2dbd933c421
+added new block: 0000032f80c32673f465b793bd874124e9f05a013d4e0daf88f8b2dbd933c421
+new blockchain height = 6
+ADDING TXN: 221159fce389a8fce8a2106be405fa8390606ade8ace90e700950ddc68a932fa
+ADDING TXN: 49dfc39d3d36d128db2ea658feddc5788e22a4f3bd2877e63c5dcda5f915f6c1
+GENERATED TXN: be9d2efef1719de8f3a4efd09f6eb51122adf38bcd8a68d2fbdf3c5b7580b1d2
+ADDING TXN: be9d2efef1719de8f3a4efd09f6eb51122adf38bcd8a68d2fbdf3c5b7580b1d2
+RECEIVED BLOCK: 00001a8a48a908a2d228185f5dfba6375393a244c95fafceb0832104f6ed387a
+added new block: 00001a8a48a908a2d228185f5dfba6375393a244c95fafceb0832104f6ed387a
+new blockchain height = 7
+ADDING TXN: eb519bf29ab8a3ef08207f59efcd02a94e78105d427d8f0be2092856a7d1d635
+ADDING TXN: 5001a2ad706e795aeace5420dc8167fab0daa340af379ec6f668186934e83fb8
+GENERATED TXN: 28e98faf4302bf2ee911823425e3b0605c58d4aa83b74e409b9cc03b47fbdd5d
+ADDING TXN: 28e98faf4302bf2ee911823425e3b0605c58d4aa83b74e409b9cc03b47fbdd5d
+RECEIVED BLOCK: 000014706f46d1bf4e91d101d1a984ad43bc71956498f6c7a79c30e0a9c20619
+added new block: 000014706f46d1bf4e91d101d1a984ad43bc71956498f6c7a79c30e0a9c20619
+new blockchain height = 8
+ADDING TXN: 0b3ec1b652a99b3927e7d9e3f06dac4f71ce04790bcf874284c23f4e2f4e7c33
+RECEIVED BLOCK: 00000301362977e4d2a14534a2abcc4ecdc27af03e79fb75d12224ed2895fa20
+added new block: 00000301362977e4d2a14534a2abcc4ecdc27af03e79fb75d12224ed2895fa20
+new blockchain height = 9
+ADDING TXN: 29efcaf5a2de393a121028fe6d689cd48403ec58ae86119c74bfb23e8cdde3ff
+GENERATED TXN: 6e0759e189b5ebac005c6ead8d2cc5d13150a42bc6081a5fad121d2b2a7a53a3
+ADDING TXN: 6e0759e189b5ebac005c6ead8d2cc5d13150a42bc6081a5fad121d2b2a7a53a3
+RECEIVED BLOCK: 00000e59318820c9e57c8c09f5018bfd115aa9af816314ee66e7fabfb9c2441d
+added new block: 00000e59318820c9e57c8c09f5018bfd115aa9af816314ee66e7fabfb9c2441d
+new blockchain height = 10
+ADDING TXN: e7cdd18eefeebcaf12ec1dad87fae35431ebd7652239404a02974ad148d9bb8d
+
+MINED NEW BLOCK! Took 7797 tries, hash = 00001218f50f6cb180afbfef25affb5e245d3893666b8a59f99e0e6b89e04c3d
+hash: [00001218f50f6cb180afbfef25affb5e245d3893666b8a59f99e0e6b89e04c3d]
+prevBlockHash: [00000e59318820c9e57c8c09f5018bfd115aa9af816314ee66e7fabfb9c2441d]
+merkleRootHash:[b6a9c42f590cad39cc4b4a2368262c3bfaa222c0b69d7c200cb3b044ee1470bc]
+    transaction 0 -- hash: [1ec4da0e13b5d243abdfac72fec38e69bcf0f760f0cf73c9b9d8bee0d3b8f9a3], inputs: [coinbase], outputs: [coinbase txn at 22:53:04.928240 + random double 0.308020806549127, Value = 750000]
+    transaction 1 -- hash: [e7cdd18eefeebcaf12ec1dad87fae35431ebd7652239404a02974ad148d9bb8d], inputs: [22:53:04.840256], outputs: [03:53:04.840256, Value = 0]
+
+added new block: 00001218f50f6cb180afbfef25affb5e245d3893666b8a59f99e0e6b89e04c3d
+new blockchain height = 11
+ADDING TXN: e8770d2fef96d9d43014e03846e79299f5292a17e19cea257cccbc5f0d93f26d
+ADDING TXN: a1600cc9e9966db5af6584cbad625ce9f9ee9cdf203f416b68b6128c6af1e9bf
+GENERATED TXN: 1294d6c08e243e7e500625bde64922bea8ac3e41a5cc5e91d5542f1fce569e5e
+ADDING TXN: 1294d6c08e243e7e500625bde64922bea8ac3e41a5cc5e91d5542f1fce569e5e
+RECEIVED BLOCK: 000000945b9497c34f0d51b01abe0fa3a656d4efa38dcb6b754a51394000660a
+added new block: 000000945b9497c34f0d51b01abe0fa3a656d4efa38dcb6b754a51394000660a
+new blockchain height = 12
+ADDING TXN: c2f2bf35a32e04d4750ede9979e6888b9ec946fd47644ef23b6621900b99ad2f
+RECEIVED BLOCK: 000007b5ef09999716bf8f704265f4b93b51493fd2ffa60cf86f23f92df83d0a
+added new block: 000007b5ef09999716bf8f704265f4b93b51493fd2ffa60cf86f23f92df83d0a
+new blockchain height = 13
+GENERATED TXN: 14cf42b76859a22890e2f014b2b273e3b0056e7ce1910857f0157d7a9b261dda
+ADDING TXN: 14cf42b76859a22890e2f014b2b273e3b0056e7ce1910857f0157d7a9b261dda
+PS C:\pyukman\Documents\UChicago\MPCS\mpcs-blockchain\lab7\Problem3\NikCoinNode\bin\Debug> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+PS C:\pyukman\Documents\UChicago\MPCS\mpcs-blockchain\lab7\Problem3\NikCoinNode\bin\Debug> Stop-Transcript
+**********************
+Windows PowerShell transcript end
+End time: 20180812225349
+**********************

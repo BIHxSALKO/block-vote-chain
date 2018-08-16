@@ -1,0 +1,67 @@
+﻿syntax = "proto3";
+
+package NikCoin.Protocol;
+
+service Node 
+{
+    rpc Handshake(HandshakeRequest) returns (HandshakeResponse) {}
+    rpc BroadcastTransaction(Transaction) returns (Empty) {}
+    rpc BroadcastBlock(Block) returns (Empty) {}
+}
+
+message HandshakeRequest
+{
+    int32 version = 1;
+    double time = 2;
+    ConnectionInfo my_connection_info = 3;
+    int32 best_height = 4;
+}
+
+message HandshakeResponse
+{
+    repeated ConnectionInfo known_nodes = 1;
+}
+
+message ConnectionInfo
+{
+    string ip_address = 1;
+    int32 port = 2;
+}
+
+message Block
+{
+    BlockHeader block_header = 1;
+    bytes hash = 2;
+    int32 transaction_counter = 3;
+    repeated Transaction transactions = 4;
+}
+
+message BlockHeader
+{
+    bytes prev_block_hash = 1;
+    bytes merkle_root_hash = 2;
+    double timestamp = 3;
+    uint32 bits = 4;
+    uint32 nonce = 5;
+}
+
+message Transaction
+{
+    bytes hash = 1;
+    int32 version_number = 2;
+    int32 in_counter = 3;
+    int32 out_counter = 4;
+    repeated string inputs = 5;
+    repeated Output outputs = 6;
+}
+
+message Output
+{
+    int32 value = 1;
+    int32 index = 2;
+    string script = 3;
+}
+
+message Empty
+{
+}

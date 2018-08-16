@@ -1,0 +1,7 @@
+packages/
+Generated/
+bin/
+obj/
+.vs/
+*.user
+*.tar

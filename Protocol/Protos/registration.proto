@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+
+package NikCoin.Protocol;
+
+service Registrar
+{
+    rpc Register (RegistrationRequest) returns (RegistrationResponse) {}
+}
+
+message RegistrationRequest
+{
+    int32 version = 1;
+    double time = 2;
+    string my_ip = 3;
+    int32 my_port = 4;
+}
+
+message RegistrationResponse
+{
+    string last_registered_node_ip = 1;
+    int32 last_registered_node_port = 2;
+}

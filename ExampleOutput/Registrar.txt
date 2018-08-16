@@ -1,0 +1,32 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20180812225118
+Username: EYAS\pyukman
+RunAs User: EYAS\pyukman
+Configuration Name: 
+Machine: EYAS (Microsoft Windows NT 10.0.16299.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+Process ID: 9336
+PSVersion: 5.1.16299.251
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.16299.251
+BuildVersion: 10.0.16299.251
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is ..\..\..\ExampleOutput\Registrar.txt
+PS C:\pyukman\Documents\UChicago\MPCS\mpcs-blockchain\lab7\Problem3\Registrar\bin\Debug> .\Registrar.exe
+Registrar listening on port 50051
+Press any key to stop the server...
+registration received from: localhost:50883
+registration received from: localhost:50884
+registration received from: localhost:50885
+PS C:\pyukman\Documents\UChicago\MPCS\mpcs-blockchain\lab7\Problem3\Registrar\bin\Debug> TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+PS C:\pyukman\Documents\UChicago\MPCS\mpcs-blockchain\lab7\Problem3\Registrar\bin\Debug> Stop-Transcript
+**********************
+Windows PowerShell transcript end
+End time: 20180812225344
+**********************
