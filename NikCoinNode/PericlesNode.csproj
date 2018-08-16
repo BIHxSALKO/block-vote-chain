@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FD07D3F0-B252-4962-AC1F-5587301961AB}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>NikCoin</RootNamespace>
-    <AssemblyName>NikCoinNode</AssemblyName>
+    <RootNamespace>Pericles</RootNamespace>
+    <AssemblyName>PericlesNode</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
