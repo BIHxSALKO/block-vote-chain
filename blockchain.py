@@ -1,9 +1,17 @@
+"""
+Implement Blockchain:
+
+Autocoins: official digital cryptocurrency of Autobots from the planet Cybertron :)
+1 Autocoin = 1000 Autobits
+"""
+from __future__ import print_function
 from hashlib import sha256
 from binascii import unhexlify, hexlify
 from time import time
 from sys import getsizeof
 from collections import deque
 
+NODE = 'A'
 
 def double_sha256(inp):
     return sha256(sha256(inp.encode('utf-8')).hexdigest().encode('utf-8')).hexdigest()
@@ -38,16 +46,19 @@ class Transaction:
     A Transaction: list_of_inputs contains the dictionary{sender, recipient, amount}
     """
 
-    def __init__(self, list_of_inputs, in_counter=1, version_number=1):
+    def __init__(self, list_of_inputs, in_counter=1, version_number=1, transaction_hash=None):
         self.version_number = version_number
         self.list_of_inputs = list_of_inputs
         self.list_of_outputs = Output(value=1, index=1, script="random")
 
         self.in_counter = in_counter
         self.out_counter = 1
-        self.transaction_hash = double_sha256(str(self.version_number) + str(self.list_of_inputs)
-                                              + str(self.list_of_outputs)
-                                              + str(self.in_counter) + str(self.out_counter))
+        if transaction_hash:
+            self.transaction_hash = transaction_hash
+        else:
+            self.transaction_hash = double_sha256(str(self.version_number) + str(self.list_of_inputs)
+                                                  + str(self.list_of_outputs)
+                                                  + str(self.in_counter) + str(self.out_counter))
 
     def print_transaction(self):
         print(self.list_of_outputs)
@@ -57,15 +68,15 @@ class Header:
     """
     Make a header for a block.
     """
-    def __init__(self, hash_prev_block, hash_merkle_root, nonce, version=1, bits=0x207fffff):
+    def __init__(self, hash_prev_block, hash_merkle_root, nonce, version=1, bits=0x1e200000, timestamp=int(time())):
         self.hash_prev_block = hash_prev_block
         self.hash_merkle_root = hash_merkle_root
         self.version = version
-        self.timestamp = int(time())
+        self.timestamp = timestamp
         self.bits = bits
         self.nonce = nonce
 
-    def cal_block_hash(self):
+    def calculate_block_hash(self):
         block_hash = double_sha256(str(self.timestamp)
                                    + str(self.hash_merkle_root)
                                    + str(self.bits)
@@ -105,19 +116,25 @@ class BlockChain:
         self.reward = 50
         self.create_genesis_block()     # create genesis block on initiation
 
+
     def create_genesis_block(self):
         dummy = "".join([str(0) for _ in range(16)])
         header = Header(hash_prev_block=dummy, hash_merkle_root=dummy, nonce=0)
-        block_hash = header.cal_block_hash()
-        coinbase_txn = Transaction(list_of_inputs={'output amount': 0})
+        block_hash = header.calculate_block_hash()
+        coinbase_txn = Transaction(list_of_inputs={'output_amount': 0})
         block = Block(index=0, block_header=header, transactions=[coinbase_txn], block_hash=block_hash)
         self.block_chain.append(block)
 
-    def create_new_transaction(self, sender, recipient, amount, output_amount):
-        self.pool.add_new_txn(Transaction(list_of_inputs={'sender': sender,
-                                                          'recipient': recipient,
-                                                          'input amount': amount,
-                                                          'output amount': output_amount}))
+    def create_new_transaction(self, sender=None, recipient=None, amount=None, output_amount=None):
+
+        """return the transaction object for stub broadcasting!!!"""
+        txn = Transaction(list_of_inputs={'sender': sender,
+                                          'recipient': recipient,
+                                          'input_amount': amount,
+                                          'output_amount': output_amount})
+
+        self.pool.add_new_txn(txn)
+        return txn
 
     def create_new_header(self, curr_list_transactions, nonce):
         block_chain_length = len(self.block_chain)
@@ -169,7 +186,11 @@ class BlockChain:
                 i += 1
 
     def mine(self):
+        print("size of pool", self.pool.get_size())
+
         while self.pool.get_size() != 0:
+            print("mining")
+            print("Length of blockchain in node %s:" % NODE, self.chain_length())
             # limit to MAX_TXNS
             if self.pool.get_size() >= self.MAX_TXNS:
                 # get 9 txns from pool
@@ -180,11 +201,13 @@ class BlockChain:
             # get total fee from the txns
             total_fee = 0
             for txn in curr_list_txns:
-                total_fee += (txn.list_of_inputs['input amount'] - txn.list_of_inputs['output amount'])
+                total_fee += (txn.list_of_inputs['input_amount'] - txn.list_of_inputs['output_amount'])
 
             # Make a coinbase txn and add 50(reward) + total_fee into coinbase
-            coinbase_txn = Transaction(list_of_inputs={'recipient': "miner's address",
-                                                       'output amount': self.reward + total_fee})
+            coinbase_txn = Transaction(list_of_inputs={'sender': "Satoshi Nakamoto's present",
+                                                       'input_amount': 0,
+                                                       'recipient': "miner's address",
+                                                       'output_amount': self.reward + total_fee})
 
             # make 10 txns. Prepend coinbase txn as first txn in block
             curr_list_txns.insert(0, coinbase_txn)
@@ -192,19 +215,19 @@ class BlockChain:
             # print("number of txns in a block", len(curr_list_txns))
             # mine block
             nonce = 0
-            target = 0x7fffff*2**(0x8*(0x20-0x3))
+            target = 0x200000*2**(0x8*(0x1e-0x3))
             header = self.create_new_header(curr_list_txns, nonce=nonce)
-
+            # print("target", target)
             """
             first attempt at block_hash
             """
-            block_hash = header.cal_block_hash()
+            block_hash = header.calculate_block_hash()
 
             while int(block_hash, 16) >= target:
-                print(".")
+                # print(".")
                 nonce += 1
                 header = self.create_new_header(curr_list_txns, nonce=nonce)
-                block_hash = header.cal_block_hash()
+                block_hash = header.calculate_block_hash()
 
             print("solved, nonce:", nonce)
             print("answer:   ", int(block_hash, 16))
@@ -212,6 +235,25 @@ class BlockChain:
             # successfully mined the block. create this block
             self.create_new_block(curr_list_transactions=curr_list_txns,
                                   header=header, block_hash=block_hash)
+
+
+            """Only for distributed nodes.
+            Delete it when running independently"""
+            # print("mining")
+            # print("import launch_node")
+            # try:
+            #     import launch_node
+            # except ImportError:
+            #     raise ImportError("NPO NON")
+            # # broadcast this block
+            # print("imported launch node")
+
+            block = dict()
+            block['list_of_txns'] = curr_list_txns
+            block['header'] = header
+            block['block_hash'] = block_hash
+            print(block)
+            return block
 
     def chain_length(self):
         return len(self.block_chain)
@@ -307,5 +349,3 @@ def main():
     print("block height of the tip of the chain: ", top_block.index)
 
 
-if __name__ == "__main__":
-    main()
