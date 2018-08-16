@@ -1,6 +1,6 @@
 ﻿syntax = "proto3";
 
-package NikCoin.Protocol;
+package Pericles.Protocol;
 
 service Registrar
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Grpc.Core;
 
-namespace NikCoin.Registrar
+namespace Pericles.Registrar
 {
     public static class Program
     {

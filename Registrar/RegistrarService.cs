@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Grpc.Core;
-using NikCoin.Protocol;
+using Pericles.Protocol;
 
-namespace NikCoin.Registrar
+namespace Pericles.Registrar
 {
     public class RegistrarService : Protocol.Registrar.RegistrarBase
     {
