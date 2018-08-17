@@ -96,6 +96,7 @@
     <Compile Include="Transactions\TransactionForwarder.cs" />
     <Compile Include="Transactions\TransactionMemoryPool.cs" />
     <Compile Include="Utils\UnixTimestampGenerator.cs" />
+    <Compile Include="Votes\Vote.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
