@@ -67,6 +67,12 @@
     <None Include="packages.config" />
     <None Include="pericles_voter_db.sqlite" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CryptoUtils\CryptoUtils.csproj">
+      <Project>{e115a2fa-466a-457d-a05f-3a01f211bfc1}</Project>
+      <Name>CryptoUtils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.109.1\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.109.1\build\net451\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

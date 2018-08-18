@@ -42,11 +42,13 @@
   <ItemGroup>
     <Compile Include="CryptoExtensions.cs" />
     <Compile Include="PasswordEncrypter.cs" />
+    <Compile Include="PasswordHasher.cs" />
     <Compile Include="PublicKeyProvider.cs" />
     <Compile Include="PrivateKeyProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EncryptedKeyPair.cs" />
     <Compile Include="EncryptedKeyPairGenerator.cs" />
+    <Compile Include="SignatureProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

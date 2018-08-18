@@ -1,5 +1,4 @@
 ﻿using System.Security.Cryptography;
-using System.Text;
 
 namespace Pericles.Crypto
 {
@@ -16,7 +15,9 @@ namespace Pericles.Crypto
 
             byte[] iv;
             var encryptedPrivateKeyStringBytes = PasswordEncrypter.EncryptBytes(password, privateKeyStringBytes, out iv);
-            return new EncryptedKeyPair(publicKeyStringBytes, privateKeyStringBytes, encryptedPrivateKeyStringBytes, iv);
+            var hashedPasswordBytes = PasswordHasher.Hash(password);
+
+            return new EncryptedKeyPair(publicKeyStringBytes, privateKeyStringBytes, encryptedPrivateKeyStringBytes, iv, hashedPasswordBytes);
         }
     }
 }
