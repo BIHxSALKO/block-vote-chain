@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using Pericles.Crypto;
+using VoterDatabase;
 
 namespace VoterRegistrationDriver
 {
@@ -40,6 +41,12 @@ namespace VoterRegistrationDriver
             }
 
             Console.WriteLine("Signature validated, everything is working amazingly");
+
+            //var db = new VoterDatabaseFacade("../../../VoterDatabase/sqlite/pericles_voter_db.sqlite");
+            //db.CreateNew();
+
+            //db.ExecuteCommand("create table voters (voter_id nvarchar, encrypted_private_key nvarchar, iv nvarchar, pw_hash nvarchar)");
+
             Console.ReadKey();
         }
     }
