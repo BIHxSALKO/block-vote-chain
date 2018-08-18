@@ -1,4 +1,6 @@
-﻿namespace ElectionModels.FirstPastThePost
+﻿using Newtonsoft.Json;
+
+namespace ElectionModels.FirstPastThePost
 {
     public class FirstPastThePostVote
     {
@@ -7,6 +9,7 @@
             this.Candidate = candidate;
         }
 
+        [JsonProperty(PropertyName = "candidate")]
         public string Candidate { get; }
     }
 }

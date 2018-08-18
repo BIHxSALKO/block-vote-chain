@@ -6,14 +6,19 @@ namespace ElectionModels.FirstPastThePost
 {
     public class FirstPastThePostElectionAlgorithm : IElectionAlgorithm
     {
+        private readonly IVoteSerializer voteSerializer;
+
+        public FirstPastThePostElectionAlgorithm(IVoteSerializer voteSerializer)
+        {
+            this.voteSerializer = voteSerializer;
+        }
+
         public IWinner GetWinner(List<IBallot> ballots)
         {
             var voteCountDict = new Dictionary<string, int>();
             foreach (var ballot in ballots)
             {
-                var contents = ballot.Contents;
-                // parse JSON into FirstPastThePostVote class
-                var vote = new FirstPastThePostVote(string.Empty);
+                var vote = this.voteSerializer.Deserialize<FirstPastThePostVote>(ballot.Contents);
 
                 var foundCandidate = voteCountDict.TryGetValue(vote.Candidate, out var voteCount);
                 if (!foundCandidate)

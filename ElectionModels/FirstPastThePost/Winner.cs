@@ -2,7 +2,7 @@
 {
     public class Winner : IWinner
     {
-        public Winner(string name, string electionStats)
+        public Winner(string name, string electionStats, ElectionType ElectionType)
         {
             this.Name = name;
             this.ElectionStats = electionStats;
