@@ -1,21 +1,30 @@
 ﻿using System;
 using System.Security.Cryptography;
 using Pericles.Crypto;
+using VoterDatabase;
 
 namespace Pericles.Votes
 {
     public class VoteValidator
     {
+        private readonly VoterDatabaseFacade voterDb;
         private readonly Blockchain blockchain;
 
-        public VoteValidator(Blockchain blockchain)
+        public VoteValidator(Blockchain blockchain, VoterDatabaseFacade voterDb)
         {
             this.blockchain = blockchain;
+            this.voterDb = voterDb;
         }
 
         public bool IsValid(Vote vote)
         {
-            return this.IsFirstVoteFromVoter(vote) && IsSignatureValid(vote);
+            return this.IsValidVoter(vote) && this.IsFirstVoteFromVoter(vote) && IsSignatureValid(vote);
+        }
+
+        private bool IsValidVoter(Vote vote)
+        {
+            var isValidVoter = this.voterDb.DoesVoterExist(vote.VoterId);
+            return isValidVoter;
         }
 
         private bool IsFirstVoteFromVoter(Vote vote)

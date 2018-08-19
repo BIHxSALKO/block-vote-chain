@@ -54,7 +54,7 @@ namespace Pericles
             var blockFactory = new BlockFactory(merkleTreeFactory, minerId);
             var protoBlockFactory = new ProtoBlockFactory(protoVoteFactory);
             var blockForwarder = new BlockForwarder(nodeClientStore, protoBlockFactory);
-            var voteValidator = new VoteValidator(blockchain);
+            var voteValidator = new VoteValidator(blockchain, voterDb);
             var blockValidator = new BlockValidator(blockFactory, voteValidator);
             var blockchainAdder = new BlockchainAdder(blockchain, voteMemoryPool, blockForwarder);
 

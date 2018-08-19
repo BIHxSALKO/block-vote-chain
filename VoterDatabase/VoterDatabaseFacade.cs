@@ -31,6 +31,16 @@ namespace VoterDatabase
             this.ExecuteCommand(insertStatement);
         }
 
+        public bool DoesVoterExist(string voterId)
+        {
+            var connection = this.OpenConnection();
+            var queryString = $"select * from voters where voter_id = \"{voterId}\"";
+            var query = new SQLiteCommand(queryString, connection);
+            var reader = query.ExecuteReader();
+            var voterExists = reader.Read();
+            return voterExists;
+        }
+
         public bool TryGetVoterEncryptedKeyPair(string password, out EncryptedKeyPair encryptedKeyPair)
         {
             var passwordHash = PasswordHasher.Hash(password);
