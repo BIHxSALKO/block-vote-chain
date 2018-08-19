@@ -100,9 +100,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CryptoUtils\CryptoUtils.csproj">
+      <Project>{e115a2fa-466a-457d-a05f-3a01f211bfc1}</Project>
+      <Name>CryptoUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Protocol\Protocol.csproj">
       <Project>{724dfc8c-4b57-4c3f-811c-0463be2a2829}</Project>
       <Name>Protocol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VoterDatabase\VoterDatabase.csproj">
+      <Project>{7bade1aa-798e-4cf8-affd-df17da525f87}</Project>
+      <Name>VoterDatabase</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
