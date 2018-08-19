@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Pericles.Hashing;
-using Pericles.Transactions;
+using Pericles.Votes;
 using Pericles.Votes;
 
 namespace Pericles.Merkle

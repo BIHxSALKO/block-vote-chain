@@ -3,7 +3,7 @@ using Pericles.Blocks;
 using Pericles.Merkle;
 using Pericles.Mining;
 using Pericles.Networking;
-using Pericles.Transactions;
+using Pericles.Votes;
 
 namespace Pericles
 {
@@ -30,28 +30,25 @@ namespace Pericles
             var nodeServerFactory = new NodeServerFactory();
 
             // transactions
-            var protoTransactionFactory = new ProtoTransactionFactory();
-            var transactionForwarder = new TransactionForwarder(nodeClientStore, protoTransactionFactory);
-            var transactionMemoryPool = new TransactionMemoryPool(transactionForwarder);
-            var incomingTransactionSimulator = new IncomingTransactionSimulator(transactionMemoryPool);
+            var protoVoteFactory = new ProtoVoteFactory();
+            var transactionForwarder = new VoteForwarder(nodeClientStore, protoVoteFactory);
+            var transactionMemoryPool = new VoteMemoryPool(transactionForwarder);
 
             // blocks
             var merkleNodeFactory = new MerkleNodeFactory();
             var merkleTreeFactory = new MerkleTreeFactory(merkleNodeFactory);
             var blockFactory = new BlockFactory(merkleTreeFactory);
-            var protoBlockFactory = new ProtoBlockFactory(protoTransactionFactory);
+            var protoBlockFactory = new ProtoBlockFactory(protoVoteFactory);
             var blockForwarder = new BlockForwarder(nodeClientStore, protoBlockFactory);
             var blockchainAdder = new BlockchainAdder(blockchain, transactionMemoryPool, blockForwarder);
             var blockValidator = new BlockValidator(blockFactory);
 
             // mining
             var difficultyTarget = TargetFactory.Build(BlockHeader.DefaultBits);
-            var coinbaseTransactionFactory = new CoinbaseTransactionFactory();
             var miner = new Miner(
                 blockchain,
                 transactionMemoryPool,
                 difficultyTarget,
-                coinbaseTransactionFactory, 
                 blockFactory,
                 blockchainAdder);
 
@@ -80,8 +77,6 @@ namespace Pericles
             boostrapper.Bootstrap(myConnectionInfo);
             Console.WriteLine($"{MinNetworkSize} nodes in network! bootstrapping complete");
             
-            Console.WriteLine("simulating incoming transactions...");
-            incomingTransactionSimulator.Start();
 
             Console.WriteLine("starting miner...");
             miner.Start();

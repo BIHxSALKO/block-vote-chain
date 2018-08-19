@@ -2,7 +2,7 @@
 using Pericles.Blocks;
 using Pericles.Mining;
 using Pericles.Protocol;
-using Pericles.Transactions;
+using Pericles.Votes;
 
 namespace Pericles.Networking
 {
@@ -13,7 +13,7 @@ namespace Pericles.Networking
             KnownNodeStore knownNodeStore,
             NodeClientFactory nodeClientFactory,
             NodeClientStore nodeClientStore,
-            TransactionMemoryPool transactionMemoryPool,
+            VoteMemoryPool transactionMemoryPool,
             Blockchain blockchain,
             Miner miner,
             BlockValidator blockValidator,

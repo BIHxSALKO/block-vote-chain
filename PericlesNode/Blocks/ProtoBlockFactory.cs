@@ -1,16 +1,16 @@
 ﻿using System.Linq;
 using Google.Protobuf;
-using Pericles.Transactions;
+using Pericles.Votes;
 
 namespace Pericles.Blocks
 {
     public class ProtoBlockFactory
     {
-        private readonly ProtoTransactionFactory protoTransactionFactory;
+        private readonly ProtoVoteFactory protoVoteFactory;
 
-        public ProtoBlockFactory(ProtoTransactionFactory protoTransactionFactory)
+        public ProtoBlockFactory(ProtoVoteFactory protoVoteFactory)
         {
-            this.protoTransactionFactory = protoTransactionFactory;
+            this.protoVoteFactory = protoVoteFactory;
         }
 
         public Protocol.Block Build(Block block)
@@ -29,12 +29,12 @@ namespace Pericles.Blocks
             {
                 BlockHeader = protoBlockHeader,
                 Hash = ByteString.CopyFrom(block.Hash.GetBytes()),
-                VoteCounter = block.TransactionCounter,
+                VoteCounter = block.VoteCounter,
                 Votes = { }
             };
 
-            var protoTransactions = block.MerkleTree.Votes.Select(x => this.protoTransactionFactory.Build(x));
-            protoBlock.Votes.AddRange(protoTransactions);
+            var protoVotes = block.MerkleTree.Votes.Select(x => this.protoVoteFactory.Build(x));
+            protoBlock.Votes.AddRange(protoVotes);
 
             return protoBlock;
         }

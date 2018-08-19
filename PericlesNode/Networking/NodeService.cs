@@ -6,7 +6,7 @@ using Pericles.Blocks;
 using Pericles.Hashing;
 using Pericles.Mining;
 using Pericles.Protocol;
-using Pericles.Transactions;
+using Pericles.Votes;
 using Block = Pericles.Blocks.Block;
 
 namespace Pericles.Networking
@@ -16,7 +16,7 @@ namespace Pericles.Networking
         private readonly KnownNodeStore knownNodeStore;
         private readonly NodeClientFactory nodeClientFactory;
         private readonly NodeClientStore nodeClientStore;
-        private readonly TransactionMemoryPool transactionMemoryPool;
+        private readonly VoteMemoryPool voteMemoryPool;
         private readonly Blockchain blockchain;
         private readonly Miner miner;
         private readonly BlockValidator blockValidator;
@@ -26,7 +26,7 @@ namespace Pericles.Networking
             KnownNodeStore knownNodeStore,
             NodeClientFactory nodeClientFactory,
             NodeClientStore nodeClientStore,
-            TransactionMemoryPool transactionMemoryPool,
+            VoteMemoryPool voteMemoryPool,
             Blockchain blockchain,
             Miner miner,
             BlockValidator blockValidator,
@@ -35,7 +35,7 @@ namespace Pericles.Networking
             this.knownNodeStore = knownNodeStore;
             this.nodeClientFactory = nodeClientFactory;
             this.nodeClientStore = nodeClientStore;
-            this.transactionMemoryPool = transactionMemoryPool;
+            this.voteMemoryPool = voteMemoryPool;
             this.blockchain = blockchain;
             this.miner = miner;
             this.blockValidator = blockValidator;
@@ -57,14 +57,14 @@ namespace Pericles.Networking
             return Task.FromResult(response);
         }
 
-        public override Task<Empty> BroadcastTransaction(Protocol.Transaction protoTransaction, ServerCallContext context)
+        public override Task<Empty> BroadcastVote(Protocol.Vote protoVote, ServerCallContext context)
         {
-            var transaction = new Transactions.Transaction(protoTransaction);
-            this.transactionMemoryPool.AddTransaction(transaction);
+            var vote = new Votes.Vote(protoVote);
+            this.voteMemoryPool.AddVote(vote);
 
-            // want to fill up blocks with as many transactions as possible, so we
+            // want to fill up blocks with as many votes as possible, so we
             // ask miner to start over if a new txn comes in and can fit it in block
-            if (this.transactionMemoryPool.Count <= Block.MaxVotes)
+            if (this.voteMemoryPool.Count <= Block.MaxVotes)
             {
                 this.miner.AbandonCurrentBlock();
             }
