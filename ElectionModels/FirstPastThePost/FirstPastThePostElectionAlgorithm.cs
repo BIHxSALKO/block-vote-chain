@@ -14,7 +14,7 @@ namespace ElectionModels.FirstPastThePost
             this.voteSerializer = voteSerializer;
         }
 
-        public IWinner GetWinner(IEnumerable<string> ballots)
+        public string GetResults(IEnumerable<string> ballots)
         {
             var voteCountDict = new Dictionary<string, int>();
             foreach (var ballot in ballots)
@@ -39,8 +39,8 @@ namespace ElectionModels.FirstPastThePost
                 throw new Exception("it's a tie! oh no");
             }
 
-            var winner = new Winner(winners[0].Key, $"# of votes: {winners[0].Value}", ElectionType.FirstPastThePost);
-            return winner;
+            var results = $"Winner: {winners[0].Key}, with {winners[0].Value} votes in a {ElectionType.FirstPastThePost} election";
+            return results;
         }
     }
 }

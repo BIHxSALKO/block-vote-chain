@@ -4,6 +4,6 @@ namespace ElectionModels.Interfaces
 {
     public interface IElectionAlgorithm
     {
-        IWinner GetWinner(IEnumerable<string> ballots);
+        string GetResults(IEnumerable<string> ballots);
     }
 }

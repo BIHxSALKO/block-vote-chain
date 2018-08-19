@@ -19,7 +19,7 @@ namespace ElectionModelTester
             var ballot5 = "{ \"candidate\": \"Jane Doe\" }";
             var ballots = new List<string> { ballot1, ballot2, ballot3, ballot4, ballot5 };
 
-            var winner = algo.GetWinner(ballots);
+            var results = algo.GetResults(ballots);
         }
     }
 }
