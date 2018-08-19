@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using System.Text;
+﻿using System.Text;
 using Pericles.Hashing;
 using Pericles.Merkle;
 
@@ -46,7 +45,7 @@ namespace Pericles.Blocks
 
         private Hash ComputeHash()
         {
-            return Sha256DoubleHasher.DoubleHash(this.Header.GetBytes());
+            return new Sha256DoubleHasher().DoubleHash(this.Header.GetBytes());
         }
     }
 }

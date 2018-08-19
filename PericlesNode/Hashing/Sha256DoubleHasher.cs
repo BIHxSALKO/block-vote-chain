@@ -2,16 +2,22 @@
 
 namespace Pericles.Hashing
 {
-    public static class Sha256DoubleHasher
+    public class Sha256DoubleHasher
     {
-        private static readonly object locker = new object();
-        private static readonly SHA256Managed SHA256 = new SHA256Managed();
+        private readonly SHA256Managed sha256;
+        private readonly object locker;
 
-        public static Hash DoubleHash(byte[] bytes)
+        public Sha256DoubleHasher()
         {
-            lock (locker)
+            this.sha256 = new SHA256Managed();
+            this.locker = new object();
+        }
+
+        public Hash DoubleHash(byte[] bytes)
+        {
+            lock (this.locker)
             {
-                var hash = SHA256.ComputeHash(SHA256.ComputeHash(bytes));
+                var hash = this.sha256.ComputeHash(this.sha256.ComputeHash(bytes));
                 return new Hash(hash);
             }
         }

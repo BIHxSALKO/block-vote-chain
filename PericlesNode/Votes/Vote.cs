@@ -34,7 +34,7 @@ namespace Pericles.Votes
 
         private Hash ComputeHash()
         {
-            return Sha256DoubleHasher.DoubleHash(this.GetBytes());
+            return new Sha256DoubleHasher().DoubleHash(this.GetBytes());
         }
     }
 }

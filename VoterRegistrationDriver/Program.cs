@@ -14,11 +14,11 @@ namespace VoterRegistrationDriver
 
             //db.CreateVoter(password);
 
-            EncryptedKeyPair keyPair;
-            db.TryGetVoterEncryptedKeyPair(password, out keyPair);
+            //EncryptedKeyPair keyPair;
+            //db.TryGetVoterEncryptedKeyPair(password, out keyPair);
 
-            RSACryptoServiceProvider privateKey;
-            PrivateKeyProvider.TryGetPrivateKey(keyPair.EncryptedPrivateKey, password, keyPair.InitializationVector, out privateKey);
+            //RSACryptoServiceProvider privateKey;
+            //PrivateKeyProvider.TryGetPrivateKey(keyPair.EncryptedPrivateKey, password, keyPair.InitializationVector, out privateKey);
 
             // ENCRYPTION DEMO
             //var myPassword = "monkey123";

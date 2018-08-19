@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace ElectionModels
+namespace ElectionModels.Interfaces
 {
     public interface IElectionAlgorithm
     {
-        IWinner GetWinner(List<IBallot> ballots);
+        IWinner GetWinner(IEnumerable<string> ballots);
     }
 }
