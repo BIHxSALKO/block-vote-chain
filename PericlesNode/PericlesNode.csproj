@@ -88,14 +88,13 @@
     <Compile Include="Networking\RegistrationRequestFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transactions\CoinbaseTransactionFactory.cs" />
-    <Compile Include="Transactions\GenesisTransaction.cs" />
     <Compile Include="Transactions\IncomingTransactionSimulator.cs" />
-    <Compile Include="Transactions\ProtoTransactionFactory.cs" />
-    <Compile Include="Transactions\Transaction.cs" />
     <Compile Include="Transactions\TransactionForwarder.cs" />
     <Compile Include="Transactions\TransactionMemoryPool.cs" />
     <Compile Include="Utils\UnixTimestampGenerator.cs" />
+    <Compile Include="Votes\GenesisVote.cs" />
+    <Compile Include="Votes\ProtoVoteFactory.cs" />
+    <Compile Include="Votes\TransactionMemoryPool.cs" />
     <Compile Include="Votes\Vote.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -33,7 +33,7 @@ namespace Pericles.Blocks
                 Votes = { }
             };
 
-            var protoTransactions = block.MerkleTree.Transactions.Select(x => this.protoTransactionFactory.Build(x));
+            var protoTransactions = block.MerkleTree.Votes.Select(x => this.protoTransactionFactory.Build(x));
             protoBlock.Votes.AddRange(protoTransactions);
 
             return protoBlock;
