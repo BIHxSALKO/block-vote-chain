@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO.Pipes;
 using Pericles.Blocks;
 using Pericles.Crypto;
 using Pericles.Merkle;
@@ -55,9 +54,9 @@ namespace Pericles
             var blockFactory = new BlockFactory(merkleTreeFactory, minerId);
             var protoBlockFactory = new ProtoBlockFactory(protoVoteFactory);
             var blockForwarder = new BlockForwarder(nodeClientStore, protoBlockFactory);
-            var blockchainAdder = new BlockchainAdder(blockchain, transactionMemoryPool, blockForwarder);
-            var blockValidator = new BlockValidator(blockFactory);
             var voteValidator = new VoteValidator(blockchain);
+            var blockValidator = new BlockValidator(blockFactory, voteValidator);
+            var blockchainAdder = new BlockchainAdder(blockchain, transactionMemoryPool, blockForwarder);
 
             // mining
             var difficultyTarget = TargetFactory.Build(BlockHeader.DefaultBits);
@@ -77,9 +76,9 @@ namespace Pericles
                 transactionMemoryPool,
                 blockchain,
                 miner,
+                voteValidator,
                 blockValidator,
-                blockchainAdder,
-                voteValidator);
+                blockchainAdder);
             var boostrapper = new Bootstrapper(
                 MinNetworkSize,
                 knownNodeStore,

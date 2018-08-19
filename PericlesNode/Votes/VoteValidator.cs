@@ -13,7 +13,7 @@ namespace Pericles.Votes
             this.blockchain = blockchain;
         }
 
-        public bool IsValidate(Vote vote)
+        public bool IsValid(Vote vote)
         {
             return this.IsFirstVoteFromVoter(vote) && IsSignatureValid(vote);
         }
@@ -27,8 +27,10 @@ namespace Pericles.Votes
         private static bool IsSignatureValid(Vote vote)
         {
             var publicKey = PublicKeyProvider.GetPublicKey(Convert.FromBase64String(vote.VoterId));
-            var isSignatureValid = publicKey.VerifyData(vote.Ballot.GetBytes(), 
-                new SHA256CryptoServiceProvider(), Convert.FromBase64String(vote.Signature));
+            var isSignatureValid = publicKey.VerifyData(
+                vote.Ballot.GetBytes(),
+                new SHA256CryptoServiceProvider(),
+                Convert.FromBase64String(vote.Signature));
             return isSignatureValid;
         }
 
