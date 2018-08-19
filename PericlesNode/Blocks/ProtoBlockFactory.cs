@@ -29,12 +29,12 @@ namespace Pericles.Blocks
             {
                 BlockHeader = protoBlockHeader,
                 Hash = ByteString.CopyFrom(block.Hash.GetBytes()),
-                TransactionCounter = block.TransactionCounter,
-                Transactions = { }
+                VoteCounter = block.TransactionCounter,
+                Votes = { }
             };
 
             var protoTransactions = block.MerkleTree.Transactions.Select(x => this.protoTransactionFactory.Build(x));
-            protoBlock.Transactions.AddRange(protoTransactions);
+            protoBlock.Votes.AddRange(protoTransactions);
 
             return protoBlock;
         }

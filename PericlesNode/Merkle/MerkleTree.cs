@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Pericles.Hashing;
 using Pericles.Transactions;
+using Pericles.Votes;
 
 namespace Pericles.Merkle
 {
@@ -10,16 +11,16 @@ namespace Pericles.Merkle
     {
         public MerkleTree(
             MerkleNode root, 
-            List<Transaction> transactions, 
+            List<Vote> votes, 
             Dictionary<Hash, MerkleNode> leafNodesDictionary)
         {
             this.Root = root;
-            this.Transactions = transactions;
+            this.Votes = votes;
             this.LeafNodesDictionary = leafNodesDictionary;
         }
 
         public MerkleNode Root { get; }
-        public List<Transaction> Transactions { get; }
+        public List<Vote> Votes { get; }
         public Dictionary<Hash, MerkleNode> LeafNodesDictionary { get; }
 
         public override string ToString()

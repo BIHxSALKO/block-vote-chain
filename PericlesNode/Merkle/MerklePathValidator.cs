@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Pericles.Transactions;
+using Pericles.Votes;
 
 namespace Pericles.Merkle
 {
@@ -13,10 +14,10 @@ namespace Pericles.Merkle
             this.merkleNodeFactory = merkleNodeFactory;
         }
 
-        public bool IsTransactionInMerkleTree(Transaction transaction, MerkleTree merkleTree)
+        public bool IsVoteInMerkleTree(Vote vote, MerkleTree merkleTree)
         {
             MerkleNode transactionNode;
-            if (!merkleTree.LeafNodesDictionary.TryGetValue(transaction.Hash, out transactionNode))
+            if (!merkleTree.LeafNodesDictionary.TryGetValue(vote.Hash, out transactionNode))
             {
                 return false;
             }

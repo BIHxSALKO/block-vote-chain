@@ -91,7 +91,6 @@
     <Compile Include="Transactions\CoinbaseTransactionFactory.cs" />
     <Compile Include="Transactions\GenesisTransaction.cs" />
     <Compile Include="Transactions\IncomingTransactionSimulator.cs" />
-    <Compile Include="Transactions\Output.cs" />
     <Compile Include="Transactions\ProtoTransactionFactory.cs" />
     <Compile Include="Transactions\Transaction.cs" />
     <Compile Include="Transactions\TransactionForwarder.cs" />

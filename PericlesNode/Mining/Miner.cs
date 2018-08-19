@@ -78,7 +78,7 @@ namespace Pericles.Mining
 
         private Block MineNewBlock(out int numTries)
         {
-            var transactions = this.transactionMemoryPool.GetTransactions(Block.MaxNonCoinbaseTransactions);
+            var transactions = this.transactionMemoryPool.GetTransactions(Block.MaxVotes);
             var coinbaseTransaction = this.coinbaseTransactionFactory.Build();
             transactions.Insert(0, coinbaseTransaction);
 

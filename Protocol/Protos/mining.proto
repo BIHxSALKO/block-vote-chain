@@ -5,7 +5,7 @@ package Pericles.Protocol;
 service Node 
 {
     rpc Handshake(HandshakeRequest) returns (HandshakeResponse) {}
-    rpc BroadcastTransaction(Transaction) returns (Empty) {}
+    rpc BroadcastVote(Vote) returns (Empty) {}
     rpc BroadcastBlock(Block) returns (Empty) {}
 }
 
@@ -32,8 +32,9 @@ message Block
 {
     BlockHeader block_header = 1;
     bytes hash = 2;
-    int32 transaction_counter = 3;
-    repeated Transaction transactions = 4;
+    string miner_id = 3;
+    int32 vote_counter = 4;
+    repeated Vote votes = 5;
 }
 
 message BlockHeader
@@ -45,21 +46,13 @@ message BlockHeader
     uint32 nonce = 5;
 }
 
-message Transaction
+message Vote
 {
     bytes hash = 1;
     int32 version_number = 2;
-    int32 in_counter = 3;
-    int32 out_counter = 4;
-    repeated string inputs = 5;
-    repeated Output outputs = 6;
-}
-
-message Output
-{
-    int32 value = 1;
-    int32 index = 2;
-    string script = 3;
+    string voter_id = 3;
+    string ballot = 4;
+    string signature = 5;
 }
 
 message Empty

@@ -24,7 +24,7 @@ namespace Pericles.Blocks
         public void AddNewBlock(Block block)
         {
             this.blockchain.AddBlock(block);
-            this.RemoveTransactionsFromMemPool(block.MerkleTree.Transactions);
+            this.RemoveTransactionsFromMemPool(block.MerkleTree.Votes);
 
             Console.WriteLine($"added new block: {block.Hash}");
             Console.WriteLine($"new blockchain height = {this.blockchain.CurrentHeight}");

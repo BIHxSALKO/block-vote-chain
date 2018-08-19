@@ -51,7 +51,7 @@ namespace Pericles
                 }
 
                 this.blockStore.Add(block.Hash, block);
-                foreach (var transaction in block.MerkleTree.Transactions)
+                foreach (var transaction in block.MerkleTree.Votes)
                 {
                     this.transactionDict.Add(transaction.Hash, transaction);
                 }

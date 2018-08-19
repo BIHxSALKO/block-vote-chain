@@ -2,6 +2,7 @@
 using System.Linq;
 using Pericles.Hashing;
 using Pericles.Transactions;
+using Pericles.Votes;
 
 namespace Pericles.Merkle
 {
@@ -14,10 +15,10 @@ namespace Pericles.Merkle
             this.merkleNodeFactory = merkleNodeFactory;
         }
 
-        public MerkleTree BuildMerkleTree(List<Transaction> transactions)
+        public MerkleTree BuildMerkleTree(List<Vote> votes)
         {
-            var transactionHashes = transactions.Select(x => x.Hash); 
-            var leaves = transactionHashes.Select(this.merkleNodeFactory.BuildLeaf).ToList();
+            var voteHashes = votes.Select(x => x.Hash); 
+            var leaves = voteHashes.Select(this.merkleNodeFactory.BuildLeaf).ToList();
             if (!leaves.Any())
             {
                 return null;
@@ -25,7 +26,7 @@ namespace Pericles.Merkle
 
             var merkleRoot = this.BuildMerkleRoot(leaves);
             var leafNodesDictionary = this.BuildLeafNodesDictionary(leaves);
-            return new MerkleTree(merkleRoot, transactions, leafNodesDictionary);
+            return new MerkleTree(merkleRoot, votes, leafNodesDictionary);
         }
 
         private MerkleNode BuildMerkleRoot(List<MerkleNode> nodeList)

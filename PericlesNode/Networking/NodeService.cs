@@ -64,7 +64,7 @@ namespace Pericles.Networking
 
             // want to fill up blocks with as many transactions as possible, so we
             // ask miner to start over if a new txn comes in and can fit it in block
-            if (this.transactionMemoryPool.Count <= Block.MaxNonCoinbaseTransactions)
+            if (this.transactionMemoryPool.Count <= Block.MaxVotes)
             {
                 this.miner.AbandonCurrentBlock();
             }
