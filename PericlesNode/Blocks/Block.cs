@@ -32,11 +32,11 @@ namespace Pericles.Blocks
 
         public override string ToString()
         {
-            var transactions = this.MerkleTree.Votes;
+            var votes = this.MerkleTree.Votes;
             var sb = new StringBuilder();
-            for (var i = 0; i < transactions.Count; i++)
+            for (var i = 0; i < votes.Count; i++)
             {
-                var vote = transactions[i];
+                var vote = votes[i];
                 sb.AppendLine($"    vote {i} -- {vote}");
             }
 

@@ -64,6 +64,7 @@ namespace Pericles
                 foreach (var vote in block.MerkleTree.Votes)
                 {
                     this.votesDictByHash.Add(vote.Hash, vote);
+                    this.votesDictByVoter.Add(vote.VoterId, vote);
                 }
             }
         }
@@ -108,11 +109,11 @@ namespace Pericles
             }
         }
 
-        public bool TryGetVoteByHash(Hash transactionHash, out Vote vote)
+        public bool TryGetVoteByHash(Hash voteHash, out Vote vote)
         {
             lock (this.locker)
             {
-                return this.votesDictByHash.TryGetValue(transactionHash, out vote);
+                return this.votesDictByHash.TryGetValue(voteHash, out vote);
             }
         }
 

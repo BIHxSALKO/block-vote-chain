@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Pericles.Votes;
 
 namespace Pericles.Blocks
@@ -8,16 +7,16 @@ namespace Pericles.Blocks
     public class BlockchainAdder
     {
         private readonly Blockchain blockchain;
-        private readonly VoteMemoryPool transactionMemoryPool;
+        private readonly VoteMemoryPool voteMemoryPool;
         private readonly BlockForwarder blockForwarder;
 
         public BlockchainAdder(
             Blockchain blockchain,
-            VoteMemoryPool transactionMemoryPool,
+            VoteMemoryPool voteMemoryPool,
             BlockForwarder blockForwarder)
         {
             this.blockchain = blockchain;
-            this.transactionMemoryPool = transactionMemoryPool;
+            this.voteMemoryPool = voteMemoryPool;
             this.blockForwarder = blockForwarder;
         }
 
@@ -32,11 +31,11 @@ namespace Pericles.Blocks
             this.blockForwarder.ForwardBlock(block);
         }
 
-        private void RemoveVotesFromMemPool(IEnumerable<Vote> transactions)
+        private void RemoveVotesFromMemPool(IEnumerable<Vote> votes)
         {
-            foreach (var vote in transactions.Skip(1))
+            foreach (var vote in votes)
             {
-                this.transactionMemoryPool.DeleteVote(vote.Hash);
+                this.voteMemoryPool.DeleteVote(vote.Hash);
             }
         }
     }

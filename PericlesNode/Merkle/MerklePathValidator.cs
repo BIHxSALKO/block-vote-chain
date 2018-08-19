@@ -16,19 +16,19 @@ namespace Pericles.Merkle
 
         public bool IsVoteInMerkleTree(Vote vote, MerkleTree merkleTree)
         {
-            MerkleNode transactionNode;
-            if (!merkleTree.LeafNodesDictionary.TryGetValue(vote.Hash, out transactionNode))
+            MerkleNode voteNode;
+            if (!merkleTree.LeafNodesDictionary.TryGetValue(vote.Hash, out voteNode))
             {
                 return false;
             }
 
-            var merklePath = MerklePathFinder.FindMerklePath(merkleTree, transactionNode);
+            var merklePath = MerklePathFinder.FindMerklePath(merkleTree, voteNode);
             if (!merklePath.Any())
             {
-                return transactionNode.Hash.Equals(merkleTree.Root.Hash);
+                return voteNode.Hash.Equals(merkleTree.Root.Hash);
             }
 
-            var validationRoot = this.ComputeRootUsingMerklePath(merklePath, transactionNode);
+            var validationRoot = this.ComputeRootUsingMerklePath(merklePath, voteNode);
             return validationRoot.Hash.Equals(merkleTree.Root.Hash);
         }
 

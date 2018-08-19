@@ -42,10 +42,10 @@ namespace Pericles
             var nodeClientStore = new NodeClientStore();
             var nodeServerFactory = new NodeServerFactory();
 
-            // transactions
+            // votes
             var protoVoteFactory = new ProtoVoteFactory();
-            var transactionForwarder = new VoteForwarder(nodeClientStore, protoVoteFactory);
-            var transactionMemoryPool = new VoteMemoryPool(transactionForwarder);
+            var voteForwarder = new VoteForwarder(nodeClientStore, protoVoteFactory);
+            var voteMemoryPool = new VoteMemoryPool(voteForwarder);
 
             // blocks
             var merkleNodeFactory = new MerkleNodeFactory();
@@ -56,13 +56,13 @@ namespace Pericles
             var blockForwarder = new BlockForwarder(nodeClientStore, protoBlockFactory);
             var voteValidator = new VoteValidator(blockchain);
             var blockValidator = new BlockValidator(blockFactory, voteValidator);
-            var blockchainAdder = new BlockchainAdder(blockchain, transactionMemoryPool, blockForwarder);
+            var blockchainAdder = new BlockchainAdder(blockchain, voteMemoryPool, blockForwarder);
 
             // mining
             var difficultyTarget = TargetFactory.Build(BlockHeader.DefaultBits);
             var miner = new Miner(
                 blockchain,
-                transactionMemoryPool,
+                voteMemoryPool,
                 difficultyTarget,
                 blockFactory,
                 blockchainAdder);
@@ -73,7 +73,7 @@ namespace Pericles
                 knownNodeStore,
                 nodeClientFactory,
                 nodeClientStore,
-                transactionMemoryPool,
+                voteMemoryPool,
                 blockchain,
                 miner,
                 voteValidator,

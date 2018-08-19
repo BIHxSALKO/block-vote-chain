@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Numerics;
 using System.Threading;
 using Pericles.Blocks;
@@ -10,7 +9,7 @@ namespace Pericles.Mining
     public class Miner
     {
         private readonly Blockchain blockchain;
-        private readonly VoteMemoryPool transactionMemoryPool;
+        private readonly VoteMemoryPool voteMemoryPool;
         private readonly BigInteger difficultyTarget;
         private readonly BlockFactory blockFactory;
         private readonly BlockchainAdder blockchainAdder;
@@ -21,13 +20,13 @@ namespace Pericles.Mining
 
         public Miner(
             Blockchain blockchain,
-            VoteMemoryPool transactionMemoryPool,
+            VoteMemoryPool voteMemoryPool,
             BigInteger difficultyTarget,
             BlockFactory blockFactory,
             BlockchainAdder blockchainAdder)
         {
             this.blockchain = blockchain;
-            this.transactionMemoryPool = transactionMemoryPool;
+            this.voteMemoryPool = voteMemoryPool;
             this.difficultyTarget = difficultyTarget;
             this.blockFactory = blockFactory;
             this.blockchainAdder = blockchainAdder;
@@ -54,7 +53,7 @@ namespace Pericles.Mining
         {
             while (true)
             {
-                if (this.transactionMemoryPool.Count == 0)
+                if (this.voteMemoryPool.Count == 0)
                 {
                     Thread.Sleep(100);
                     continue;
@@ -75,9 +74,9 @@ namespace Pericles.Mining
 
         private Block MineNewBlock(out int numTries)
         {
-            var transactions = this.transactionMemoryPool.GetVotes(Block.MaxVotes);
+            var votes = this.voteMemoryPool.GetVotes(Block.MaxVotes);
             var prevBlockHash = this.blockchain.GetLast().Hash;
-            var block = this.blockFactory.Build(prevBlockHash, transactions);
+            var block = this.blockFactory.Build(prevBlockHash, votes);
 
             numTries = 1;
             while (true)
