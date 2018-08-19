@@ -57,6 +57,7 @@ namespace Pericles
             var blockForwarder = new BlockForwarder(nodeClientStore, protoBlockFactory);
             var blockchainAdder = new BlockchainAdder(blockchain, transactionMemoryPool, blockForwarder);
             var blockValidator = new BlockValidator(blockFactory);
+            var voteValidator = new VoteValidator(blockchain);
 
             // mining
             var difficultyTarget = TargetFactory.Build(BlockHeader.DefaultBits);
@@ -77,7 +78,8 @@ namespace Pericles
                 blockchain,
                 miner,
                 blockValidator,
-                blockchainAdder);
+                blockchainAdder,
+                voteValidator);
             var boostrapper = new Bootstrapper(
                 MinNetworkSize,
                 knownNodeStore,

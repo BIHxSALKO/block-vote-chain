@@ -17,7 +17,8 @@ namespace Pericles.Networking
             Blockchain blockchain,
             Miner miner,
             BlockValidator blockValidator,
-            BlockchainAdder blockchainAdder)
+            BlockchainAdder blockchainAdder,
+            VoteValidator voteValidator)
         {
             var handshakeService = new NodeService(
                 knownNodeStore,
@@ -27,7 +28,8 @@ namespace Pericles.Networking
                 blockchain,
                 miner,
                 blockValidator,
-                blockchainAdder);
+                blockchainAdder,
+                voteValidator);
             var server = new Server
             {
                 Services = { Node.BindService(handshakeService) },

@@ -9,13 +9,15 @@ namespace Pericles
     public class Blockchain
     {
         private readonly OrderedDictionary blockStore; // allows lookup by key and by index
-        private readonly Dictionary<Hash, Vote> transactionDict;
+        private readonly Dictionary<Hash, Vote> votesDictByHash;
+        private readonly Dictionary<string, Vote> votesDictByVoter;
         private readonly object locker;
 
         public Blockchain()
         {
             this.blockStore = new OrderedDictionary();
-            this.transactionDict = new Dictionary<Hash, Vote>();
+            this.votesDictByHash = new Dictionary<Hash, Vote>();
+            this.votesDictByVoter = new Dictionary<string, Vote>();
             this.locker = new object();
 
             var genesisBlock = GenesisBlock.Instance;
@@ -41,6 +43,14 @@ namespace Pericles
             }
         }
 
+        public bool ContainsVoter(string voterId)
+        {
+            lock (this.locker)
+            {
+                return this.votesDictByVoter.ContainsKey(voterId);
+            }
+        }
+
         public void AddBlock(Block block)
         {
             lock (this.locker)
@@ -53,7 +63,7 @@ namespace Pericles
                 this.blockStore.Add(block.Hash, block);
                 foreach (var vote in block.MerkleTree.Votes)
                 {
-                    this.transactionDict.Add(vote.Hash, vote);
+                    this.votesDictByHash.Add(vote.Hash, vote);
                 }
             }
         }
@@ -102,7 +112,15 @@ namespace Pericles
         {
             lock (this.locker)
             {
-                return this.transactionDict.TryGetValue(transactionHash, out vote);
+                return this.votesDictByHash.TryGetValue(transactionHash, out vote);
+            }
+        }
+
+        public bool TryGetVoteByVoter(string voterId, out Vote vote)
+        {
+            lock (this.locker)
+            {
+                return this.votesDictByVoter.TryGetValue(voterId, out vote);
             }
         }
     }

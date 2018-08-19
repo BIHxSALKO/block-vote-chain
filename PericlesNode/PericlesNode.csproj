@@ -94,6 +94,7 @@
     <Compile Include="Votes\VoteForwarder.cs" />
     <Compile Include="Votes\VoteMemoryPool.cs" />
     <Compile Include="Votes\Vote.cs" />
+    <Compile Include="Votes\VoteValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

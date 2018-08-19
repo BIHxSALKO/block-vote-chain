@@ -21,6 +21,7 @@ namespace Pericles.Networking
         private readonly Miner miner;
         private readonly BlockValidator blockValidator;
         private readonly BlockchainAdder blockchainAdder;
+        private readonly VoteValidator voteValidator;
 
         public NodeService(
             KnownNodeStore knownNodeStore,
@@ -30,7 +31,8 @@ namespace Pericles.Networking
             Blockchain blockchain,
             Miner miner,
             BlockValidator blockValidator,
-            BlockchainAdder blockchainAdder)
+            BlockchainAdder blockchainAdder,
+            VoteValidator voteValidator)
         {
             this.knownNodeStore = knownNodeStore;
             this.nodeClientFactory = nodeClientFactory;
@@ -40,6 +42,7 @@ namespace Pericles.Networking
             this.miner = miner;
             this.blockValidator = blockValidator;
             this.blockchainAdder = blockchainAdder;
+            this.voteValidator = voteValidator;
         }
 
         public override Task<HandshakeResponse> Handshake(HandshakeRequest request, ServerCallContext context)
@@ -60,6 +63,11 @@ namespace Pericles.Networking
         public override Task<Empty> BroadcastVote(Protocol.Vote protoVote, ServerCallContext context)
         {
             var vote = new Votes.Vote(protoVote);
+            if (!this.voteValidator.IsValidate(vote))
+            {
+                return Task.FromResult(new Empty());
+            }
+            
             this.voteMemoryPool.AddVote(vote);
 
             // want to fill up blocks with as many votes as possible, so we
