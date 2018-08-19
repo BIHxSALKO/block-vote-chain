@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Threading;
 using Pericles.Blocks;
-using Pericles.Transactions;
+using Pericles.Votes;
 
 namespace Pericles.Mining
 {
     public class Miner
     {
         private readonly Blockchain blockchain;
-        private readonly TransactionMemoryPool transactionMemoryPool;
+        private readonly VoteMemoryPool transactionMemoryPool;
         private readonly BigInteger difficultyTarget;
-        private readonly CoinbaseTransactionFactory coinbaseTransactionFactory;
         private readonly BlockFactory blockFactory;
         private readonly BlockchainAdder blockchainAdder;
         private readonly object locker;
@@ -22,16 +21,14 @@ namespace Pericles.Mining
 
         public Miner(
             Blockchain blockchain,
-            TransactionMemoryPool transactionMemoryPool,
+            VoteMemoryPool transactionMemoryPool,
             BigInteger difficultyTarget,
-            CoinbaseTransactionFactory coinbaseTransactionFactory, 
             BlockFactory blockFactory,
             BlockchainAdder blockchainAdder)
         {
             this.blockchain = blockchain;
             this.transactionMemoryPool = transactionMemoryPool;
             this.difficultyTarget = difficultyTarget;
-            this.coinbaseTransactionFactory = coinbaseTransactionFactory;
             this.blockFactory = blockFactory;
             this.blockchainAdder = blockchainAdder;
             this.locker = new object();
@@ -78,10 +75,7 @@ namespace Pericles.Mining
 
         private Block MineNewBlock(out int numTries)
         {
-            var transactions = this.transactionMemoryPool.GetTransactions(Block.MaxVotes);
-            var coinbaseTransaction = this.coinbaseTransactionFactory.Build();
-            transactions.Insert(0, coinbaseTransaction);
-
+            var transactions = this.transactionMemoryPool.GetVotes(Block.MaxVotes);
             var prevBlockHash = this.blockchain.GetLast().Hash;
             var block = this.blockFactory.Build(prevBlockHash, transactions);
 

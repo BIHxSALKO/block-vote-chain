@@ -14,14 +14,14 @@ namespace Pericles.Blocks
         {
             this.Header = header;
             this.MerkleTree = merkleTree;
-            this.TransactionCounter = merkleTree.LeafNodesDictionary.Count;
+            this.VoteCounter = merkleTree.LeafNodesDictionary.Count;
             this.MinerId = minerId;
             this.Hash = this.ComputeHash();
         }
 
         public BlockHeader Header { get; }
         public MerkleTree MerkleTree { get; }
-        public int TransactionCounter { get; }
+        public int VoteCounter { get; }
         public string MinerId { get; }
         public Hash Hash { get; private set; }
 
@@ -37,8 +37,8 @@ namespace Pericles.Blocks
             var sb = new StringBuilder();
             for (var i = 0; i < transactions.Count; i++)
             {
-                var transaction = transactions[i];
-                sb.AppendLine($"    transaction {i} -- {transaction}");
+                var vote = transactions[i];
+                sb.AppendLine($"    vote {i} -- {vote}");
             }
 
             return $"hash: [{this.Hash}]\nprevBlockHash: [{this.Header.PrevBlockHash}]\nmerkleRootHash:[{this.Header.MerkleRootHash}]\n{sb}";

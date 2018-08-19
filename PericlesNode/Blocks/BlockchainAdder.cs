@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Pericles.Transactions;
+using Pericles.Votes;
 
 namespace Pericles.Blocks
 {
     public class BlockchainAdder
     {
         private readonly Blockchain blockchain;
-        private readonly TransactionMemoryPool transactionMemoryPool;
+        private readonly VoteMemoryPool transactionMemoryPool;
         private readonly BlockForwarder blockForwarder;
 
         public BlockchainAdder(
             Blockchain blockchain,
-            TransactionMemoryPool transactionMemoryPool,
+            VoteMemoryPool transactionMemoryPool,
             BlockForwarder blockForwarder)
         {
             this.blockchain = blockchain;
@@ -24,7 +24,7 @@ namespace Pericles.Blocks
         public void AddNewBlock(Block block)
         {
             this.blockchain.AddBlock(block);
-            this.RemoveTransactionsFromMemPool(block.MerkleTree.Votes);
+            this.RemoveVotesFromMemPool(block.MerkleTree.Votes);
 
             Console.WriteLine($"added new block: {block.Hash}");
             Console.WriteLine($"new blockchain height = {this.blockchain.CurrentHeight}");
@@ -32,11 +32,11 @@ namespace Pericles.Blocks
             this.blockForwarder.ForwardBlock(block);
         }
 
-        private void RemoveTransactionsFromMemPool(IEnumerable<Transaction> transactions)
+        private void RemoveVotesFromMemPool(IEnumerable<Vote> transactions)
         {
-            foreach (var transaction in transactions.Skip(1))
+            foreach (var vote in transactions.Skip(1))
             {
-                this.transactionMemoryPool.DeleteTransaction(transaction.Hash);
+                this.transactionMemoryPool.DeleteVote(vote.Hash);
             }
         }
     }

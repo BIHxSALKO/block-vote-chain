@@ -1,6 +1,6 @@
 ﻿using Pericles.Hashing;
 using Pericles.Merkle;
-using Pericles.Transactions;
+using Pericles.Votes;
 
 namespace Pericles.Blocks
 {
@@ -13,6 +13,6 @@ namespace Pericles.Blocks
         private static readonly BlockFactory GenesisBlockFactory = new BlockFactory(GenesisMerkleTreeFactory);
 
         public static readonly Block Instance =
-            GenesisBlockFactory.Build(GenesisPrevBlockHash, GenesisTransaction.Instance);
+            GenesisBlockFactory.Build(GenesisPrevBlockHash, GenesisVote.Instance);
     }
 }

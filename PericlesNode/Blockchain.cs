@@ -2,20 +2,20 @@
 using System.Collections.Specialized;
 using Pericles.Blocks;
 using Pericles.Hashing;
-using Pericles.Transactions;
+using Pericles.Votes;
 
 namespace Pericles
 {
     public class Blockchain
     {
         private readonly OrderedDictionary blockStore; // allows lookup by key and by index
-        private readonly Dictionary<Hash, Transaction> transactionDict;
+        private readonly Dictionary<Hash, Vote> transactionDict;
         private readonly object locker;
 
         public Blockchain()
         {
             this.blockStore = new OrderedDictionary();
-            this.transactionDict = new Dictionary<Hash, Transaction>();
+            this.transactionDict = new Dictionary<Hash, Vote>();
             this.locker = new object();
 
             var genesisBlock = GenesisBlock.Instance;
@@ -51,9 +51,9 @@ namespace Pericles
                 }
 
                 this.blockStore.Add(block.Hash, block);
-                foreach (var transaction in block.MerkleTree.Votes)
+                foreach (var vote in block.MerkleTree.Votes)
                 {
-                    this.transactionDict.Add(transaction.Hash, transaction);
+                    this.transactionDict.Add(vote.Hash, vote);
                 }
             }
         }
@@ -98,11 +98,11 @@ namespace Pericles
             }
         }
 
-        public bool TryGetTransactionByHash(Hash transactionHash, out Transaction transaction)
+        public bool TryGetVoteByHash(Hash transactionHash, out Vote vote)
         {
             lock (this.locker)
             {
-                return this.transactionDict.TryGetValue(transactionHash, out transaction);
+                return this.transactionDict.TryGetValue(transactionHash, out vote);
             }
         }
     }
