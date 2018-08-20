@@ -16,7 +16,10 @@ namespace Pericles.Votes
 
         public Vote(Protocol.Vote protoVote)
         {
-
+            this.VoterId = protoVote.VoterId;
+            this.Ballot = protoVote.Ballot;
+            this.Signature = protoVote.Signature;
+            this.Hash = this.ComputeHash();
         }
 
         public string VoterId { get; }
