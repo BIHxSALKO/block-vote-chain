@@ -46,6 +46,8 @@
     <Compile Include="ElectionType.cs" />
     <Compile Include="FirstPastThePost\FirstPastThePostElectionAlgorithm.cs" />
     <Compile Include="FirstPastThePost\FirstPastThePostVote.cs" />
+    <Compile Include="InstantRunoff\InstantRunoffAlgorithm.cs" />
+    <Compile Include="InstantRunoff\InstantRunoffVote.cs" />
     <Compile Include="Winner.cs" />
     <Compile Include="Interfaces\IElectionAlgorithm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
